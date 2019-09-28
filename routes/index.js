@@ -20,8 +20,6 @@ router.get('/:id',middleware(), controller.findOne);
 router.get('/tasks/create',middleware(), controller.create);
 router.get('/tasks/edit/:id',middleware(), controller.edit);
 router.post('/store',middleware(), controller.store);
-
 router.put('/:id',middleware(), controller.update);
-
 router.delete('/:id',middleware(), controller.delete);
 module.exports = router;
