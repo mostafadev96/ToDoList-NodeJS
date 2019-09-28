@@ -5,8 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var app = express();
-const mongoose = require('mongoose');
 const dbConfig = require('./config/environment');
+const mongoose = require('mongoose');
+var methodOverride = require("method-override");
 
 mongoose.Promise = global.Promise;
 
@@ -22,7 +23,7 @@ mongoose.connect(dbConfig.url, {
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
+app.use(methodOverride("_method"));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -43,6 +44,7 @@ var authRouter = require('./routes/auth')(app);
 var indexRouter = require('./routes/index')(app);
 app.use((req, res, next) => {
   if (req.cookies.user_sid && !req.session.user) {
+
     res.clearCookie('user_sid');
   }
   next();

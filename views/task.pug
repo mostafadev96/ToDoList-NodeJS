@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    h1= title
+    h1= task.body
+    #user
+        pre= "-" + task.content
+        h3= task.date
+        a(href='/tasks/edit/'+task._id) Update Task

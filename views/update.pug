@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    h1= title
+    form(action='/'+task._id+'?_method=PUT', method='POST')
+        p
+            | content:
+            textarea(name='content', rows = 5, cols = 30)= task.content
+        input(value='Submit', type='submit')

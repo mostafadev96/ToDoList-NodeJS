@@ -2,12 +2,12 @@ extends layout
 
 block content
     h1= title
+    a(href='/tasks/create') Create A Task
     #user
-        if 'tasks' in user
-            h2 All Tasks:
-            ul
-                each val, index in user.tasks
-                    li= val.body
-        else
-            h2 There is no tasks
+        each val in tasks
+            pre= "-" + val.content
+            h3= val.date
+            a(href='/tasks/edit/' + val._id) Update
+            form(action='/'+val._id+'?_method=DELETE', method='POST')
+                input(value='Delete', type='submit')
 

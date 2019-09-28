@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    h1= title
+    form(action='/store', method='POST')
+        p
+            | content:
+            textarea(name='content', rows = 5, cols = 30)
+        input(value='Submit', type='submit')

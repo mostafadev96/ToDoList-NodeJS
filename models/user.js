@@ -1,9 +1,12 @@
 const mongoose = require('mongoose');
-
+var Schema = mongoose.Schema;
 const UserSchema = mongoose.Schema({
     email: String,
     password: String,
-    tasks: [{ body: String, date: Date }],
+    tasks:
+        [
+            { type: Schema.Types.ObjectId, ref: 'Task' }
+        ],
 }, {
     timestamps: true
 });

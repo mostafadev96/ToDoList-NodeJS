@@ -2,9 +2,7 @@ extends authlayout
 
 block content
     h1= title
-    h2
-        a(href='/register') Register
-    form(action='/login', method='POST')
+    form(action='/register', method='POST')
         p
             | email:
             input(name='email', value='', type='email')
