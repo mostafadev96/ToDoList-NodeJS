@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    h1= title
+    #user
+        if 'tasks' in user
+            h2 All Tasks:
+            ul
+                each val, index in user.tasks
+                    li= val.body
+        else
+            h2 There is no tasks
+

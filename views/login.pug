@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h1= title
+    form(action='/login', method='POST')
+        p
+            | email:
+            input(name='email', value='', type='email')
+            |          password:
+            input(name='password', value='', type='password')
+        input(value='Submit', type='submit')
