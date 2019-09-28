@@ -16,8 +16,8 @@ var middleware=() => {
 module.exports = (app) => {
     const users = require('../controllers/user_controller');
 
-    app.get('/login',middleware(), users.getLogin);
-    app.post('/login',middleware(), users.PostLogin);
-    app.post('/register',middleware(), users.PostSignup);
-    app.get('/register',middleware(), users.getSignup);
+    app.get('/login',middleware(), (req,res)=>{users.getLogin});
+    app.post('/login',middleware(), (req,res)=>{users.PostLogin});
+    app.post('/register',middleware(), (req,res)=>{users.PostSignup});
+    app.get('/register',middleware(), (req,res)=>{users.getSignup});
 };
