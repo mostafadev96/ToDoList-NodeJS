@@ -10,6 +10,8 @@ var middleware= () => {
 
 module.exports = (app) => {
   const TODO = require('../controllers/to-do-list');
+
+  app.get('/logout',middleware(), TODO.Logout);
   app.get('/',middleware(), TODO.findAll);
   app.get('/:id',middleware(), TODO.findOne);
   app.get('/tasks/create',middleware(), TODO.create);
@@ -19,6 +21,4 @@ module.exports = (app) => {
   app.put('/:id',middleware(), TODO.update);
 
   app.delete('/:id',middleware(), TODO.delete);
-  app.get('/logout',middleware(), TODO.Logout);
-
 };
