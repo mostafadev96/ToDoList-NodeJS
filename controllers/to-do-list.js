@@ -2,7 +2,7 @@ const Task = require('../models/task');
 const User = require('../models/user');
 
 
-exports.Logout = (req, res) => {
+module.exports.Logout = (req, res) => {
     if (req.session.user && req.cookies.user_sid) {
         console.log("sdf");
         res.clearCookie('user_sid');
@@ -10,7 +10,7 @@ exports.Logout = (req, res) => {
     res.redirect('/login');
 };
 
-exports.findAll = (req, res) => {
+module.exports.findAll = (req, res) => {
 
     User.findOne({email: req.session.user.email})
         .populate('tasks')
@@ -24,7 +24,7 @@ exports.findAll = (req, res) => {
         });
     });
 };
-exports.findOne = (req, res) => {
+module.exports.findOne = (req, res) => {
     Task.findById(req.params.id)
         .populate('user')
         .then(task => {
@@ -42,11 +42,11 @@ exports.findOne = (req, res) => {
 });
 };
 
-exports.create = (req, res) => {
+module.exports.create = (req, res) => {
     res.render('create', { title: 'Welcome To your To-do-List',req:req });
 };
 
-exports.store = (req, res) => {
+module.exports.store = (req, res) => {
     // Validate request
     if(!req.body.content) {
         return res.status(400).send({
@@ -89,7 +89,7 @@ exports.store = (req, res) => {
     });
 };
 
-exports.edit = (req, res) => {
+module.exports.edit = (req, res) => {
     var user=req.session.user;
     Task.findById(req.params.id)
         .populate('user')
@@ -113,7 +113,7 @@ exports.edit = (req, res) => {
 };
 
 
-exports.update = (req, res) => {
+module.exports.update = (req, res) => {
     // Validate Request
     var user=req.session.user;
 

@@ -1,11 +1,11 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
-exports.getLogin = (req, res) => {
+module.exports.getLogin = (req, res) => {
     res.render('login', { title: 'Welcome To login Page' });
 };
 
-exports.PostLogin = (req, res) => {
+module.exports.PostLogin = (req, res) => {
     var email = req.body.email,
         password = req.body.password;
     User.findOne({email:email})
@@ -39,10 +39,10 @@ exports.PostLogin = (req, res) => {
     });
 };
 
-exports.getSignup = (req, res) => {
+module.exports.getSignup = (req, res) => {
     res.render('register', { title: 'Welcome To registration Page' });
 };
-exports.PostSignup = (req, res) => {
+module.exports.PostSignup = (req, res) => {
     User.findOne({email:req.body.email})
         .then(user => {
             if(!user) {
