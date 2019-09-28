@@ -10,31 +10,15 @@ var middleware= () => {
 
 module.exports = (app) => {
   const TODO = require('../controllers/to-do-list');
-  app.get('/',middleware(),(req, res)=>{
-    TODO.findAll
-  });
-  app.get('/:id',middleware(),(req, res)=>{
-    TODO.findOne
-  });
-  app.get('/tasks/create',middleware(),(req, res)=>{
-    TODO.create
-  } );
-  app.get('/tasks/edit/:id',middleware(),(req, res)=>{
-    TODO.edit
-  } );
-  app.post('/store',middleware(),(req, res)=>{
-    TODO.store
-  } );
+  app.get('/',middleware(), TODO.findAll);
+  app.get('/:id',middleware(), TODO.findOne);
+  app.get('/tasks/create',middleware(), TODO.create);
+  app.get('/tasks/edit/:id',middleware(), TODO.edit);
+  app.post('/store',middleware(), TODO.store);
 
-  app.put('/:id',middleware(),(req, res)=>{
-    TODO.update
-  } );
+  app.put('/:id',middleware(), TODO.update);
 
-  app.delete('/:id',middleware(),(req, res)=>{
-    TODO.delete
-  } );
-  app.get('/logout',middleware(),(req, res)=>{
-    TODO.Logout
-  } );
+  app.delete('/:id',middleware(), TODO.delete);
+  app.get('/logout',middleware(), TODO.Logout);
 
 };
