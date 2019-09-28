@@ -11,14 +11,6 @@ var middleware= () => {
   };
 };
 
-
-module.exports = (app) => {
-  // const users = require('../controllers/user_controller');
-  app.get('/',middleware() ,function(req, res, next) {
-    res.render('index', { title: 'Express' ,email : req.session.user.email});
-  });
-};
-
 module.exports = (app) => {
   const TODO = require('../controllers/to-do-list');
 
