@@ -1,3 +1,10 @@
+var express = require('express');
+
+
+var controller = require('../controllers/to-do-list');
+
+var router = express.Router();
+
 var middleware= () => {
   return function (req, res, next) {
     if (!req.cookies.user_sid || !req.session.user) {
@@ -7,18 +14,14 @@ var middleware= () => {
     }
   };
 };
+router.get('/logout',middleware(), controller.Logout);
+router.get('/',middleware(), controller.findAll);
+router.get('/:id',middleware(), controller.findOne);
+router.get('/tasks/create',middleware(), controller.create);
+router.get('/tasks/edit/:id',middleware(), controller.edit);
+router.post('/store',middleware(), controller.store);
 
-module.exports = (app) => {
-  const TODO = require('../controllers/to-do-list');
+router.put('/:id',middleware(), controller.update);
 
-  app.get('/logout',middleware(), TODO.Logout);
-  app.get('/',middleware(), TODO.findAll);
-  app.get('/:id',middleware(), TODO.findOne);
-  app.get('/tasks/create',middleware(), TODO.create);
-  app.get('/tasks/edit/:id',middleware(), TODO.edit);
-  app.post('/store',middleware(), TODO.store);
-
-  app.put('/:id',middleware(), TODO.update);
-
-  app.delete('/:id',middleware(), TODO.delete);
-};
+router.delete('/:id',middleware(), controller.delete);
+module.exports = router;

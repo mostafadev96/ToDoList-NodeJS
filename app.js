@@ -40,8 +40,8 @@ app.use(session({
     expires: 600000
   }
 }));
-var authRouter = require('./routes/auth')(app);
-var indexRouter = require('./routes/index')(app);
+app.use('/',require('./routes/auth'));
+app.use('/',require('./routes/index'));
 app.use((req, res, next) => {
   if (req.cookies.user_sid && !req.session.user) {
 

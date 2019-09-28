@@ -1,7 +1,7 @@
 var express = require('express');
+var controller = require('../controllers/user_controller');
+
 var router = express.Router();
-var User = require('./../models/user.js');
-
 var middleware=() => {
     return function (req, res, next) {
         if (req.cookies.user_sid && req.session.user) {
@@ -11,23 +11,10 @@ var middleware=() => {
         }
     };
 };
+router.get('/login',middleware(), controller.getLogin);
+router.post('/login',middleware(), controller.PostLogin);
+router.post('/register',middleware(), controller.PostSignup);
+router.get('/register',middleware(), controller.getSignup);
+module.exports = router;
 
-var middleware=() => {
-    return function (req, res, next) {
-        if (req.cookies.user_sid && req.session.user) {
-            res.redirect('/');
-        } else {
-            next();
-        }
-    };
-};
 
-module.exports = (app) => {
-    const users = require('../controllers/user_controller');
-
-    // Create a new Note
-    app.get('/login',middleware(), users.getLogin);
-    app.post('/login',middleware(), users.PostLogin);
-    app.post('/register',middleware(), users.PostSignup);
-    app.get('/register',middleware(), users.getSignup);
-};
